@@ -1,133 +1,135 @@
-# Todo List App
+# ✅ Todo List App  
 
-Aplikasi Todo List sederhana yang dibangun dengan Flutter menggunakan Provider untuk state management.
+Aplikasi **Todo List sederhana** yang dibangun dengan **Flutter** menggunakan **Provider** sebagai state management.  
 
-## Deskripsi Aplikasi
+![Flutter](https://img.shields.io/badge/Flutter-Framework-blue?logo=flutter&logoColor=white)  
+![Provider](https://img.shields.io/badge/Provider-State%20Management-green)  
+![License](https://img.shields.io/badge/License-MIT-lightgrey)  
 
-Aplikasi ini adalah todo list sederhana yang memungkinkan pengguna untuk:
-- Menambahkan todo baru
-- Menandai todo sebagai selesai/belum selesai
-- Mengedit todo yang sudah ada
-- Menghapus todo
-- Melihat history todo yang sudah selesai
+---
 
-## Widget Tree
+## ✨ Fitur Utama  
+- ➕ Tambah todo baru  
+- ✅ Tandai todo selesai / belum selesai  
+- ✏️ Edit todo yang sudah ada  
+- 🗑️ Hapus todo  
+- 📜 Lihat **history todo** yang sudah selesai  
 
-```
-MaterialApp (StatelessWidget)
-└── ChangeNotifierProvider<TodoProvider>
-    └── HomeScreen (StatefulWidget)
-        ├── Scaffold
-        │   ├── AppBar
-        │   │   ├── Text("Todo List")
-        │   │   └── IconButton (History)
-        │   └── Body: Column
-        │       ├── Container (Input Section)
-        │       │   └── Row
-        │       │       ├── Expanded
-        │       │       │   └── TextField
-        │       │       └── ElevatedButton (+)
-        │       └── Expanded
-        │           └── Consumer<TodoProvider>
-        │               └── ListView.builder
-        │                   └── TodoItem (StatelessWidget)
-        │                       └── Card
-        │                           └── ListTile
-        │                               ├── Checkbox
-        │                               ├── Text (Title)
-        │                               ├── Text (Date)
-        │                               └── Row (Actions)
-        │                                   ├── IconButton (Edit)
-        │                                   └── IconButton (Delete)
-        └── Navigator (untuk ke HistoryScreen)
-            └── HistoryScreen (StatelessWidget)
-                ├── Scaffold
-                │   ├── AppBar
-                │   │   └── Text("History Todo")
-                │   └── Body: Consumer<TodoProvider>
-                │       └── ListView.builder
-                │           └── TodoItem (StatelessWidget)
-                │               └── Card
-                │                   └── ListTile
-                │                       ├── Checkbox
-                │                       ├── Text (Title)
-                │                       ├── Text (Date)
-                │                       └── Row (Actions)
-                │                           ├── IconButton (Edit)
-                │                           └── IconButton (Delete)
-```
+---
 
-## Perbedaan Stateless vs Stateful Widget
+## 🛠️ Teknologi yang Digunakan  
+- [Flutter](https://flutter.dev/) – SDK utama  
+- [Provider](https://pub.dev/packages/provider) – State management  
+- [Cupertino Icons](https://pub.dev/packages/cupertino_icons) – Set icon iOS  
 
-### StatelessWidget
-- **TodoItem**: Widget yang tidak mengubah state sendiri, hanya menampilkan data
-- **HistoryScreen**: Layar yang hanya menampilkan data, tidak ada input
-- **MyApp**: Root widget yang tidak berubah
+---
 
-### StatefulWidget
-- **HomeScreen**: Mengelola state untuk input field dan dialog
-- Menggunakan `setState()` untuk mengupdate UI ketika input berubah
-- Memiliki lifecycle methods seperti `dispose()`
+## 📂 Struktur Project  
 
-## Struktur Project
-
-```
+```bash
 lib/
 ├── main.dart                 # Entry point aplikasi
 ├── models/
-│   └── todo.dart            # Model data Todo
+│   └── todo.dart             # Model data Todo
 ├── providers/
-│   └── todo_provider.dart   # State management dengan Provider
+│   └── todo_provider.dart    # State management dengan Provider
 ├── screens/
-│   ├── home_screen.dart     # Layar utama (daftar todo aktif)
-│   └── history_screen.dart  # Layar history (todo selesai)
+│   ├── home_screen.dart      # Layar utama (daftar todo aktif)
+│   └── history_screen.dart   # Layar history (todo selesai)
 └── widgets/
-    └── todo_item.dart       # Custom widget untuk item todo
+    └── todo_item.dart        # Custom widget untuk item todo
 ```
 
-## Alasan Pemilihan State Management Provider
+---
 
-Provider dipilih sebagai state management karena:
+## 🌳 Widget Tree  
 
-1. **Simplicity**: Provider mudah dipahami dan diimplementasikan, cocok untuk aplikasi sederhana seperti todo list
-2. **Performance**: Provider menggunakan ChangeNotifier yang efisien untuk rebuild widget hanya ketika state berubah
-3. **Flutter Integration**: Provider adalah solusi resmi yang direkomendasikan oleh tim Flutter
-4. **Learning Curve**: Mudah dipelajari untuk developer yang baru mengenal state management
-5. **Scalability**: Meskipun sederhana, Provider dapat dikembangkan untuk aplikasi yang lebih kompleks
+```text
+MaterialApp
+└── ChangeNotifierProvider<TodoProvider>
+    └── HomeScreen (StatefulWidget)
+        └── Scaffold
+            ├── AppBar
+            │   ├── Text("Todo List")
+            │   └── IconButton (History)
+            └── Column
+                ├── Input Section (TextField + Button)
+                └── Expanded
+                    └── Consumer<TodoProvider>
+                        └── ListView.builder
+                            └── TodoItem (Card + ListTile)
+                                ├── Checkbox
+                                ├── Text (Title + Date)
+                                ├── Edit Button
+                                └── Delete Button
+Navigator → HistoryScreen (StatelessWidget)
+```
 
-## Fitur Aplikasi
+---
 
-### Home Screen
-- Input field untuk menambah todo baru
-- Tombol + untuk menambahkan todo
-- Daftar todo yang belum selesai
-- Tombol edit dan hapus untuk setiap todo
-- Tombol history di AppBar
+## 🧩 Stateless vs Stateful  
 
-### History Screen
-- Daftar todo yang sudah selesai
-- Fungsi edit dan hapus tetap tersedia
-- Tombol kembali ke home screen
+### 📌 StatelessWidget  
+- `TodoItem` → hanya menampilkan data  
+- `HistoryScreen` → menampilkan daftar todo selesai  
+- `MyApp` → root widget aplikasi  
 
-### Validasi
-- Tidak dapat menambahkan todo kosong
-- Konfirmasi sebelum menghapus todo
-- Validasi input saat edit todo
+### 📌 StatefulWidget  
+- `HomeScreen` → mengelola input field dan interaksi user  
+- Menggunakan `setState()` pada level lokal input  
+- Memanfaatkan `Provider` untuk state global  
 
-## Cara Menjalankan
+---
 
-1. Pastikan Flutter sudah terinstall
-2. Jalankan `flutter pub get` untuk menginstall dependencies
-3. Jalankan `flutter run` untuk menjalankan aplikasi
+## 💡 Alasan Memakai Provider  
+1. 🟢 **Sederhana & mudah dipahami** untuk pemula  
+2. ⚡ **Efisien**: hanya rebuild widget yang perlu  
+3. ✅ **Direkomendasikan resmi oleh Flutter**  
+4. 📚 **Learning curve rendah**: cocok untuk belajar state management  
+5. 📈 **Scalable**: bisa dipakai di aplikasi kompleks  
 
-## Dependencies
+---
 
-- `flutter`: SDK Flutter
-- `provider: ^6.1.2`: State management
-- `cupertino_icons: ^1.0.8`: Icon set untuk iOS
+## 📱 Preview Aplikasi  
 
-## Screenshot
+### 🏠 Home Screen  
+- Tambah todo dengan input field  
+- Checklist todo yang aktif  
+- Edit & hapus todo  
+- Navigasi ke History  
 
-![Todo List App](screenshots/todo_app_screenshot.png)
+### 🗂️ History Screen  
+- Menampilkan todo yang sudah selesai  
+- Bisa edit & hapus juga  
+- Tombol kembali ke Home  
 
-*Catatan: Screenshot di atas adalah contoh UI aplikasi. Path screenshot adalah dummy dan perlu diganti dengan screenshot asli saat aplikasi dijalankan.*#
+---
+
+## 🚨 Validasi  
+- ❌ Tidak bisa menambahkan todo kosong  
+- ⚠️ Konfirmasi sebelum menghapus  
+- ✅ Validasi input saat edit  
+
+---
+
+## ▶️ Cara Menjalankan  
+
+1. Pastikan **Flutter SDK** sudah terinstall  
+2. Jalankan:  
+
+```sh
+flutter pub get
+flutter run
+```
+
+---
+
+## 🖼️ Screenshot  
+
+![Todo List App](screenshots/todo_app_screenshot.png)  
+*Catatan: Ganti path screenshot dengan file asli hasil aplikasi dijalankan.*  
+
+---
+
+## 📜 Lisensi  
+Proyek ini menggunakan lisensi **MIT** – silakan gunakan & kembangkan 🚀  
