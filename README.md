@@ -126,10 +126,11 @@ flutter run
 
 ## 🖼️ Screenshot  
 
-![Todo List App](screenshots/todo_app_screenshot.png)  
+![Todo List App](screenshots/Screenshot 2025-09-05 205756.png)  
 *Catatan: Ganti path screenshot dengan file asli hasil aplikasi dijalankan.*  
 
 ---
 
 ## 📜 Lisensi  
 Proyek ini menggunakan lisensi **MIT** – silakan gunakan & kembangkan 🚀  
+
